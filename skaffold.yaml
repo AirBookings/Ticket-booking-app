@@ -1,0 +1,39 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  local:
+    push: false
+  # googleCloudBuild:
+  #   projectId: premium-aurora-377213
+  artifacts:
+    - image: docker.io/ndife/auth
+    # - image: us.gcr.io/premium-aurora-377213/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual: 
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: docker.io/ndife/client
+    # - image: us.gcr.io/premium-aurora-377213/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual: 
+          - src: '**/*.ts'
+            dest: .
+    - image: docker.io/ndife/tickets
+    # - image: us.gcr.io/premium-aurora-377213/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual: 
+          - src: 'src/**/*.ts'
+            dest: .
