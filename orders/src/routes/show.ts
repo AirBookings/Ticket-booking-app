@@ -3,7 +3,6 @@ import express, { Request, Response } from 'express'
 import { param } from 'express-validator';
 import mongoose from 'mongoose';
 import { Order } from '../models/order';
-// import { Order } from '../model/order'
 
 const router = express.Router();
 
