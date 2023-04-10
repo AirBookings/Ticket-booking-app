@@ -12,7 +12,7 @@ import { errorHandler, NotFoundError } from '@uc-tickets/common';
 const app = express();
 app.set('trust proxy', true);
 app.use(json());
-app.use(urlencoded({ extended: true}))
+app.use(urlencoded({ extended: false}))
 app.use(cookieSession({
     signed: false, // disabled encryption
     secure: process.env.NODE_ENV !== 'test', // must be on https connection
