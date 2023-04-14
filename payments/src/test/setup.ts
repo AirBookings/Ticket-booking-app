@@ -1,16 +1,15 @@
 import { MongoMemoryServer }from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken'
-
+require('dotenv').config()
 jest.mock('../nats-wrapper')
 
 declare global {
-    var signin: () => string[];
+    var signin: (id?: string) => string[];
 }
 
 let mongo: any
 beforeAll(async () => {
-    process.env.JWT_KEY = 'dkdakdjd'
 
     mongoose.set('strictQuery', true)
     mongo = await MongoMemoryServer.create();
@@ -36,11 +35,11 @@ afterAll(async () => {
 });
 
 // signin function that returns cookie
-global.signin = () => {
+global.signin = (id?: string) => {
 
     // Build a Jwt payload. { id, email }
     const payload = {
-        id: new mongoose.Types.ObjectId().toHexString(),
+        id: id || new mongoose.Types.ObjectId().toHexString(),
         email: 'test@test.com'
     }
 
