@@ -1,12 +1,14 @@
-# This is a workflow for running the tests
+# This is a workflow for running the tickets-tests
 
-name: Tests
+name: tickets-tests
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # Triggers the workflow on pull request events but only for the "main" branch and only when changes occur in this file path
   pull_request:
     branches: [ "main" ]
+    # paths:
+    #   - 'tickets/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,6 +23,6 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Run tests on auth service
-        run: cd auth && npm install && npm run test:ci
+      - name: Run tests on tickets service
+        run: cd tickets && npm install && npm run test:ci
 
