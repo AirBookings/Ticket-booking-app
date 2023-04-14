@@ -6,7 +6,7 @@ import useRequest from '../../hooks/use-request'
 export default function Signup() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { doRequest, renderError } = useRequest({
+    const { doRequest, errors } = useRequest({
         url: '/api/users/signup',
         method: 'post',
         body: {
@@ -24,17 +24,15 @@ export default function Signup() {
     return (
         <form onSubmit={onSbmit}>
             <h1>Sign up</h1>
-            {renderError('email')}
-            {renderError()}
             <div className="form-group">
                 <label>Email Address</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} className="form-control"/>
             </div>
-            {renderError('password')}
             <div className="form-group mb-2">
                 <label>Password</label>
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control"/>
             </div>
+            {errors}
             <button className="btn btn-primary">Sign Up</button>
         </form>
     )

@@ -1,0 +1,2 @@
+create .env.local in the root folder and add this variable
+    - NEXT_PUBLIC_STRIPE_KEY
