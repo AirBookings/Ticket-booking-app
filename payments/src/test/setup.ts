@@ -5,7 +5,7 @@ require('dotenv').config()
 jest.mock('../nats-wrapper')
 
 declare global {
-    var signin: (id?: string) => string[];
+    var signin: (id?: string) => Promise<string[]>
 }
 
 let mongo: any
@@ -35,11 +35,11 @@ afterAll(async () => {
 });
 
 // signin function that returns cookie
-global.signin = (id?: string) => {
+global.signin = async (id?: string) => {
 
     // Build a Jwt payload. { id, email }
     const payload = {
-        id: id ? id : new mongoose.Types.ObjectId().toHexString(),
+        id: id || new mongoose.Types.ObjectId().toHexString(),
         email: 'test@test.com'
     }
 
