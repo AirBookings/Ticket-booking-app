@@ -9,7 +9,7 @@ import { Payment } from '../../models/payment'
 it('returns a 404 when purchasing an order that does not exist', async() => {
     await request(app)
         .post('/api/payments')
-        .set('Cookie', global.signin())
+        .set('Cookie', await global.signin())
         .send({
             token: 'adladk',
             orderId: new mongoose.Types.ObjectId().toHexString(),
@@ -29,7 +29,7 @@ it('returns a 401 when purchasing an order that does not belong to the user', as
 
     await request(app)
         .post('/api/payments')
-        .set('Cookie', global.signin())
+        .set('Cookie', await global.signin())
         .send({
             token: 'adakdl',
             orderId: order.id
@@ -51,7 +51,7 @@ it('returns a 400 when purchasing a cancelled order', async() => {
 
     await request(app)
         .post('/api/payments')
-        .set('Cookie', global.signin(userId))
+        .set('Cookie', await global.signin(userId))
         .send({
             token: 'adakdl',
             orderId: order.id
@@ -74,7 +74,7 @@ it('returns a 204 with valid inputs ', async () => {
 
     await request(app)
         .post('/api/payments')
-        .set('Cookie', global.signin(userId))
+        .set('Cookie', await global.signin(userId))
         .send({
             token: 'tok_visa',
             orderId: order.id
