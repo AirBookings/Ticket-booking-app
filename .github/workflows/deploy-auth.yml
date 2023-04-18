@@ -18,7 +18,7 @@ jobs:
       run: cd auth && docker build -t ndife/auth .
       
     - name: Login to Docker Hub
-      run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      run: docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_PASSWORD
       
     # import env variables 
       env: 
