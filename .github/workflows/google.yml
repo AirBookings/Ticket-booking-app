@@ -27,8 +27,6 @@ jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
-    env:
-      JWT_KEY: ${{ secrets.JWT_KEY }}
     environment: production
 
     steps:
@@ -52,6 +50,7 @@ jobs:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
         credentials: ${{ secrets.GKE_KEY }}
+        JWT_KEY: ${{ secrets.JWT_KEY }}
 
     # Build the Docker image
     - name: Build
@@ -66,6 +65,7 @@ jobs:
     - name: Publish
       run: |-
         docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+
 
     # Set up kustomize
     - name: Set up Kustomize
