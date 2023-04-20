@@ -23,7 +23,6 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
-          # image: us.gcr.io/premium-aurora-377213/auth
           
 ---
 apiVersion: v1
