@@ -22,7 +22,6 @@ env:
   GKE_ZONE: europe-central2
   DEPLOYMENT_NAME: auth-depl
   IMAGE: auth
-  JWT_KEY: ${{ secrets.JWT_KEY }}
 
 jobs:
   setup-build-publish-deploy:
@@ -34,6 +33,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Set ConfigMap and Secret keys
+      env:
+        JWT_KEY: ${{ secrets.JWT_KEY }}
+        # SECRET_KEY: my-secret-key
+        # SECRET_VALUE: my-secret-value
+      run: |
+        kubectl create secret generic jwt-secret --from-literal JWT_KEY=${{ secrets.JWT_KEY }}
+        
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
       with:
