@@ -54,13 +54,12 @@ jobs:
 
     # Build the Docker image
     - name: Build
-      with:
-        build-args: JWT_SECRET=${{ secrets.jwt-secret }}
       run: |-
         cd auth && docker build \
           --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
+          --build-arg JWT_SECRET=${{ secrets.jwt-secret }}
           .
 
     # Push the Docker image to Google Container Registry
