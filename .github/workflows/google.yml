@@ -22,6 +22,7 @@ env:
   GKE_ZONE: europe-central2
   DEPLOYMENT_NAME: auth-depl
   IMAGE: auth
+  JWT_KEY: ${{ secrets.JWT_KEY }}
 
 jobs:
   setup-build-publish-deploy:
