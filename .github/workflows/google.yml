@@ -15,15 +15,17 @@ name: Build and Deploy to GKE
 on:
   push:
     branches: [ "main" ]
+    # paths:
+    #   - 'auth/**'
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GAR_LOCATION: us-central1 # TODO: update region of the Artifact Registry
-  GKE_CLUSTER: cluster-1    # TODO: update to cluster name
-  GKE_ZONE: us-central1-c   # TODO: update to cluster zone
-  DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
-  REPOSITORY: samples # TODO: update to Artifact Registry docker repository
-  IMAGE: static-site
+  GAR_LOCATION: europe-central2 # TODO: update region of the Artifact Registry
+  GKE_CLUSTER: ticketing    # TODO: update to cluster name
+  GKE_ZONE: europe-central2   # TODO: update to cluster zone
+  DEPLOYMENT_NAME: deploy-auth # TODO: update to deployment name
+  REPOSITORY: gcr.io # TODO: update to Artifact Registry docker repository
+  IMAGE: deploy-auth
 
 jobs:
   setup-build-publish-deploy:
@@ -67,7 +69,7 @@ jobs:
     # Build the Docker image
     - name: Build
       run: |-
-        docker build \
+        cd auth &&docker build \
           --tag "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
