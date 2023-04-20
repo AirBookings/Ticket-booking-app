@@ -33,13 +33,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Set ConfigMap and Secret keys
-      env:
-        SECRET_KEY: JWT_KEY
-        SECRET_VALUE: ${{ secrets.JWT_KEY }}
-      run: |
-        kubectl create secret generic jwt-secret --from-literal=${SECRET_KEY}=${SECRET_VALUE} -o yaml --dry-run=client | kubectl apply -f -
-
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
       with:
@@ -57,6 +50,14 @@ jobs:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
         credentials: ${{ secrets.GKE_KEY }}
+      
+    - name: Set ConfigMap and Secret keys
+      env:
+        SECRET_KEY: JWT_KEY
+        SECRET_VALUE: ${{ secrets.JWT_KEY }}
+      run: |
+        kubectl create secret generic jwt-secret --from-literal=${SECRET_KEY}=${SECRET_VALUE} -o yaml --dry-run=client | kubectl apply -f -
+
 
     # Build the Docker image
     - name: Build
