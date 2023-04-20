@@ -50,6 +50,7 @@ jobs:
         cluster_name: ${{ env.GKE_CLUSTER }}
         location: ${{ env.GKE_ZONE }}
         credentials: ${{ secrets.GKE_KEY }}
+        JWT_KEY: ${{ secrets.JWT_KEY }}
 
     # Build the Docker image
     - name: Build
@@ -80,6 +81,3 @@ jobs:
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
-      with: 
-        secrets: |
-          JWT_KEY: ${{ secrets.JWT_KEY }}
