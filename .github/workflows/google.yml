@@ -14,7 +14,7 @@ on:
     branches:
       - main
     # paths:
-    #   - 'auth/**'
+    #   - 'auth/**' 
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
