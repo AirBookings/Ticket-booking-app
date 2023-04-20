@@ -21,7 +21,7 @@ env:
   GKE_CLUSTER: autopilot-cluster-1
   GKE_ZONE: europe-central2
   DEPLOYMENT_NAME: auth-depl
-  IMAGE: auth
+  IMAGE: auth 
 
 jobs:
   setup-build-publish-deploy:
