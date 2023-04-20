@@ -1,10 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+paths:
+      - 'infra/**'
 
 resources:
 - auth-depl.yaml
 - auth-mongo-depl.yaml
-# - cd .. && cd infra/k8s/auth-depl.yaml
-# - cd .. && cd infra/k8s/auth-mongo-depl.yaml
 
 
