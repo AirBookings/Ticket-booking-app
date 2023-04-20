@@ -23,8 +23,6 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
-            # - name: JWT_KEY
-            #   value: jwt-secret
           
 ---
 apiVersion: v1
