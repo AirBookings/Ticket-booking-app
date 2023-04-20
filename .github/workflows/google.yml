@@ -79,6 +79,12 @@ jobs:
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
+      # env:
+      #   JWT_KEY: ${{ secrets.JWT_KEY }}
+      #   jwt-secret: ${{ secrets.JWT_KEY }}
+      env_vars: |
+          - JWT_KEY: ${{ secrets.JWT_KEY }}
+            jwt-secret: ${{ secrets.JWT_KEY }}
       run: |-
         cd infra/k8s
         ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
