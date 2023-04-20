@@ -53,9 +53,6 @@ jobs:
 
     # Build the Docker image
     - name: Build
-      with:
-        build-args: |
-          JWT_KEY: ${{ secrets.JWT_KEY }}
       run: |-
         cd auth && docker build \
           --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
