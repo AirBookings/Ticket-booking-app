@@ -3,6 +3,9 @@ kind: Kustomization
 
 resources:
 - auth-depl.yaml
-# - auth-mongo-depl.yaml
+- auth-mongo-depl.yaml
+- orders-depl.yaml
+- orders-mongo-depl.yaml
+
 
 
