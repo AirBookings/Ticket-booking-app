@@ -14,7 +14,7 @@ env:
 
 jobs:
   setup-build-publish-deploy:
-    name: Setup, Build, Publish, and Deploy
+    name: deploy manifest
     runs-on: ubuntu-latest
     environment: production
 
@@ -46,5 +46,4 @@ jobs:
     - name: Deploy
       run: |-
         cd infra/k8s
-        ./kustomize build . | kubectl apply -f infra/k8s
-        kubectl get services -o wide
+        kubectl apply -f infra/k8s
