@@ -6,7 +6,7 @@ on:
       - main
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: autopilot-cluster-1
+  GKE_CLUSTER: ticketing
   GKE_ZONE: europe-central2
 
 jobs:
