@@ -6,7 +6,6 @@ resources:
 - auth-mongo-depl.yaml
 - orders-depl.yaml
 - orders-mongo-depl.yaml
-- client-depl.yaml
 - expiration-depl.yaml
 - expiration-redis-depl.yaml
 - ingress-ser.yaml
@@ -15,5 +14,6 @@ resources:
 - payments-mongo-depl.yaml
 - tickets-depl.yaml
 - tickets-mongo-depl.yaml
+# - client-depl.yaml
 
 
