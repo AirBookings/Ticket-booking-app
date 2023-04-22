@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    # paths:
-    #   - 'tickets/**' 
+    paths:
+      - 'tickets/**' 
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
