@@ -1,18 +1,18 @@
-name: Build and Deploy Auth to GKE
+name: Build and Deploy Expiration to GKE
 
 on:
   push:
     branches:
       - main
     # paths:
-    #   - 'auth/**' 
+    #   - 'expiration/**' 
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: ticketing
   GKE_ZONE: europe-central2
-  DEPLOYMENT_NAME: auth-depl
-  IMAGE: auth 
+  DEPLOYMENT_NAME: expiration-depl
+  IMAGE: expiration 
 
 jobs:
   setup-build-publish-deploy:
@@ -53,7 +53,7 @@ jobs:
     # Build the Docker image
     - name: Build
       run: |-
-        cd auth && docker build \
+        cd expiration && docker build \
           --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
@@ -65,7 +65,7 @@ jobs:
       run: |-
         docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
     
-        # Set up kustomize
+    # Set up kustomize
     - name: Set up Kustomize
       run: |-
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
@@ -80,3 +80,4 @@ jobs:
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
+
