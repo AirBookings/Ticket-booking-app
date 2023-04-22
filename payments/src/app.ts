@@ -12,7 +12,8 @@ app.use(json());
 app.use(urlencoded({ extended: false}))
 app.use(cookieSession({
     signed: false, // disabled encryption
-    secure: process.env.NODE_ENV !== 'test', // must be on https connection
+    // secure: process.env.NODE_ENV !== 'test', // must be on https connection
+    secure: false,
 }))
 app.use(currentUser)
 app.use(createChargeRouter)
